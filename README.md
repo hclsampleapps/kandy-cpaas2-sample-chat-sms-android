@@ -1,8 +1,8 @@
-# kandy-cpaas2-sample-android
+# kandy-cpaas2-sample-chat-sms-android
 It is the sample app of CPaaS modules (SMS, Chat & Multimedia Chat)
 
 ### Install as Android App
-You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-android/releases) section.
+You can download the .apk file from [releases](https://github.com/hclsampleapps/kandy-cpaas2-sample-chat-sms-android/releases) section.
 If you are a developer, then you can generate the apk from source code.
 
 Note: Minimum version required for install apk is kitkat (4.4)
@@ -12,7 +12,7 @@ Note: Minimum version required for install apk is kitkat (4.4)
 2. Enter the credentials of a user.
 
 ### Execute commands for development
-1. Setup repository via `git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-android`
+1. Setup repository via `git clone https://github.com/hclsampleapps/kandy-cpaas2-sample-chat-sms-android`
 2. Resolve build dependency via sync gradle in android studio
 3. Generate final build by android studio
 
@@ -44,7 +44,7 @@ Fork the repository. Then, run:
 
 ```
 git clone --recursive git@github.com:<username>/gitflow.git
-cd kandy-cpaas2-sample-android
+cd kandy-cpaas2-sample-chat-sms-android
 git branch master origin/master
 git flow init -d
 git checkout develop
