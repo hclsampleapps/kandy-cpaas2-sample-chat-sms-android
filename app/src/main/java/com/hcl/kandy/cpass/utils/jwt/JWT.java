@@ -201,10 +201,6 @@ public class JWT implements Parcelable {
         return 0;
     }
 
-    // =====================================
-    // ===========Private Methods===========
-    // =====================================
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(token);

@@ -324,7 +324,11 @@ public class MultiMediaChatFragment extends BaseFragment implements View.OnClick
                 return;
             uri = data.getData();
             imagePreview.setVisibility(View.VISIBLE);
-            imagePreview.setImageURI(uri);
+            try {
+                imagePreview.setImageURI(uri);
+            } catch (Exception e) {
+                imagePreview.setImageResource(R.drawable.document_image);
+            }
         }
     }
 

@@ -50,7 +50,7 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return CHAT_TYPE_ME;
     }
 
-    void downloadfile(String url, ImageView attachment_sent, String filename) {
+    void downloadfile(String url, ImageView attachment_sent, String filename, String type) {
         TransferProgressListener progressCallback = new TransferProgressListener() {
             @Override
             public void reportProgress(long bytes, long totalBytes) {
@@ -61,12 +61,16 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         DownloadCompleteListener downloadCompleteListener = new DownloadCompleteListener() {
             @Override
             public void downloadSuccess(String path) {
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                Glide.with(activity).asBitmap()
-                        .load(stream.toByteArray())
-                        .into(attachment_sent);
+                if (type.contains("image")) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(path);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    Glide.with(activity).asBitmap()
+                            .load(stream.toByteArray())
+                            .into(attachment_sent);
+                }else{
+                    attachment_sent.setImageResource(R.drawable.document_image);
+                }
             }
 
             @Override
@@ -108,9 +112,12 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 myViewHolder.message.setText(chatModel.getMessageTxt());
                 if (chatModel.getParts() != null && chatModel.getParts().size() > 1) {
                     myViewHolder.attachment_sent.setVisibility(View.VISIBLE);
+
                     downloadfile(chatModel.getParts().get(1).getFile().getLink(),
                             myViewHolder.attachment_sent,
-                            chatModel.getParts().get(1).getFile().getName());
+                            chatModel.getParts().get(1).getFile().getName(),
+                            chatModel.getParts().get(1).getFile().getContentType());
+
                 } else {
                     myViewHolder.attachment_sent.setVisibility(View.GONE);
                 }
@@ -126,7 +133,7 @@ public class MultiMediaChatAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 if (chatModel.getParts() != null && chatModel.getParts().size() > 1) {
                     otherViewHolder.attachment_sent.setVisibility(View.VISIBLE);
                     downloadfile(chatModel.getParts().get(1).getFile().getLink(), otherViewHolder.attachment_sent,
-                            chatModel.getParts().get(1).getFile().getName());
+                            chatModel.getParts().get(1).getFile().getName(),chatModel.getParts().get(1).getFile().getContentType());
                 } else {
                     otherViewHolder.attachment_sent.setVisibility(View.GONE);
                 }
