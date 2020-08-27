@@ -116,7 +116,7 @@
                     android:id="@+id/et_client_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PRIV-nesonukuv.34mv.nesopro1" />
+                    android:hint="PRIV-abcdefgh12.12ab" />
 
                 <TextView
                     android:layout_width="match_parent"
