@@ -25,6 +25,7 @@ import com.rbbn.cpaas.mobile.messaging.api.MessageDeliveryStatus;
 import com.rbbn.cpaas.mobile.messaging.api.MessageState;
 import com.rbbn.cpaas.mobile.messaging.api.MessagingCallback;
 import com.rbbn.cpaas.mobile.messaging.api.OutboundMessage;
+import com.rbbn.cpaas.mobile.messaging.api.SendMessageCallback;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatConversation;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatGroupParticipant;
 import com.rbbn.cpaas.mobile.messaging.chat.api.ChatListener;
@@ -180,9 +181,10 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
 
         ChatConversation chatConversation = (ChatConversation) chatService.createConversation(participant);
         OutboundMessage message = chatService.createMessage(txt);
-        chatConversation.send(message, new MessagingCallback() {
+        chatConversation.send(message, new SendMessageCallback() {
+
             @Override
-            public void onSuccess() {
+            public void onSuccess(OutboundMessage outboundMessage) {
                 Log.d("CPaaS.ChatService", "Message is sent");
             }
 
