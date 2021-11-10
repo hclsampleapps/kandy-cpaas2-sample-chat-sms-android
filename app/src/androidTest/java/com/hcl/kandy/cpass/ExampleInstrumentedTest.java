@@ -24,16 +24,14 @@ import static org.junit.Assert.*;
 
 import com.hcl.kandy.cpass.activities.LoginActivity;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Rule
     public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
     private String url = "abcd";
+	private String uName = "abcd";
+	private String pwd = "abcd";
+	private String client = "abcd";
 
     @Test
     public void verifyMessageSentToMessageActivity() {
@@ -42,11 +40,11 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.et_url))
                 .perform(typeText(url), closeSoftKeyboard());
         onView(withId(R.id.et_user_name))
-                .perform(typeText(url), closeSoftKeyboard());
+                .perform(typeText(uName), closeSoftKeyboard());
         onView(withId(R.id.et_user_password))
-                .perform(typeText(url), closeSoftKeyboard());
+                .perform(typeText(pwd), closeSoftKeyboard());
         onView(withId(R.id.et_user_client))
-                .perform(typeText(url), closeSoftKeyboard());
+                .perform(typeText(client), closeSoftKeyboard());
 
         // Clicks a button to send the message to another
         // activity through an explicit intent.
