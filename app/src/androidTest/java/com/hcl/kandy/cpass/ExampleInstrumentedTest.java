@@ -1,33 +1,19 @@
 package com.hcl.kandy.cpass;
 
-import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasExtraWithKey;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-
-import static org.hamcrest.Matchers.allOf;
-import static org.junit.Assert.assertThat;
-
-import android.content.Intent;
 
 import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.espresso.contrib.DrawerActions;
+import androidx.test.espresso.contrib.NavigationViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.hcl.kandy.cpass.activities.HomeActivity;
 import com.hcl.kandy.cpass.activities.LoginActivity;
 
 import org.junit.Rule;
@@ -38,13 +24,14 @@ import org.junit.runner.RunWith;
 public class ExampleInstrumentedTest {
 
 
-  //  @Rule
-   // public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
+  // @Rule
+    //public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
-    private String url = "oauth-cpaas.att.com";
-	private String uName = "karang@hcl.com";
-	private String pwd = "Test@12345";
-	private String client = "PUB-karan.prod.lwjn";
+    private String url = "domain.com";
+	private String uName = "abc@gmail.com";
+	private String pwd = "Test";
+	private String client = "PUB-abc.dfg.dghfh";
+	private String destination = "abc@gmail.com";
 
 
     @Test
@@ -75,7 +62,35 @@ public class ExampleInstrumentedTest {
         }
         onView(withId(R.id.container)).check(matches(isDisplayed()));
 
-    }/*
+
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destination), closeSoftKeyboard());
+        onView(withId(R.id.btnFetchChat)).perform(click());
+
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hi"), closeSoftKeyboard());
+        onView(withId(R.id.btnStartChat)).perform(click());
+
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sms));
+
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /*
 
     @Rule
     public IntentsTestRule<HomeActivity> intentsTestRule =
