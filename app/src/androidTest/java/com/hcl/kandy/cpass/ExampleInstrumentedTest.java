@@ -7,6 +7,7 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.contrib.DrawerActions;
@@ -24,15 +25,15 @@ import org.junit.runner.RunWith;
 public class ExampleInstrumentedTest {
 
 
-  // @Rule
+    // @Rule
     //public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
-    private String url = "domain.com";
-	private String uName = "abc@gmail.com";
-	private String pwd = "Test";
-	private String client = "PUB-abc.dfg.dghfh";
-	private String destination = "abc@gmail.com";
-
+    private String url = "domain.att.com";
+    private String uName = "abc@abc.com";
+    private String pwd = "ABC@123";
+    private String client = "PUB-abc.att.ldjd";
+    private String destination = "abc@gmail.com";
+    private String destinationSMS = "+911234567123";
 
     @Test
     public void verifyMessageSentToMessageActivity() {
@@ -72,7 +73,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.btnStartChat)).perform(click());
 
         try {
-            Thread.sleep(30000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -82,28 +83,34 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sms));
 
         try {
-            Thread.sleep(30000);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withText("+12102424496")).perform(click());
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destinationSMS), closeSoftKeyboard());
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hello"), closeSoftKeyboard());
+        onView(withId(R.id.btnStartSMS)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
+
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_chat));
+
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
     }
-
-
-    /*
-
-    @Rule
-    public IntentsTestRule<HomeActivity> intentsTestRule =
-            new IntentsTestRule<>(HomeActivity.class);
-
-    @Test
-    public void verifyHome(){
-        Intents.init();
-        intended(allOf(
-                hasComponent(hasShortClassName(".HomeActivity")),
-                toPackage("com.hcl.kandy.cpass.activities"),
-                hasExtraWithKey(LoginActivity.id_token)));
-
-    }*/
 
 }
