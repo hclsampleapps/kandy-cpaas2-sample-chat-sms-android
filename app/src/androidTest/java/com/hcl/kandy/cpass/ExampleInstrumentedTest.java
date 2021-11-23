@@ -28,12 +28,13 @@ public class ExampleInstrumentedTest {
     // @Rule
     //public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
-    private String url = "domain.att.com";
-    private String uName = "abc@abc.com";
-    private String pwd = "ABC@123";
-    private String client = "PUB-abc.att.ldjd";
-    private String destination = "abc@gmail.com";
-    private String destinationSMS = "+911234567123";
+    private String url = "oauth-cpaas.att.com";
+    private String uName = "karang@hcl.com";
+    private String pwd = "Test@12345";
+    private String client = "PUB-karan.prod.lwjn";
+    private String destination = "ashish@gmail.com";
+    private String destinationSMS = "+911234567890";
+    private String destinationAddress = "abc@gmail.com";
 
     @Test
     public void verifyMessageSentToMessageActivity() {
@@ -102,14 +103,25 @@ public class ExampleInstrumentedTest {
         }
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
 
-
-        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_chat));
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_multimedia));
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        onView(withId(R.id.etDestainationAddress))
+                .perform(typeText(destinationAddress), closeSoftKeyboard());
+
+        onView(withId(R.id.btnFetchChat)).perform(click());
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
