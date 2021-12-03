@@ -64,7 +64,6 @@ public class ExampleInstrumentedTest {
         }
         onView(withId(R.id.container)).check(matches(isDisplayed()));
 
-
         onView(withId(R.id.etDestainationAddress))
                 .perform(typeText(destination), closeSoftKeyboard());
         onView(withId(R.id.btnFetchChat)).perform(click());
@@ -79,7 +78,6 @@ public class ExampleInstrumentedTest {
             e.printStackTrace();
         }
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open()); // Open Drawer
-
 
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sms));
 
@@ -115,13 +113,16 @@ public class ExampleInstrumentedTest {
                 .perform(typeText(destinationAddress), closeSoftKeyboard());
 
         onView(withId(R.id.btnFetchChat)).perform(click());
+        onView(withId(R.id.etMessage))
+                .perform(typeText("hello"), closeSoftKeyboard());
+
+        onView(withId(R.id.btnSendChat)).perform(click());
 
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
     }
 
