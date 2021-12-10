@@ -65,10 +65,3 @@ Contributors should strictly follow JAVA standard conventions:
 1. Class names are in camelCase
 2. Package names start with lowerCase
 3. Variable names are in camelCase
-
-private String url = "oauth-cpaas.att.com";
-private String uName = "karang@hcl.com";
-private String pwd = "Test@12345";
-private String client = "PUB-karan.prod.lwjn";
-private String destination = "ashish@gmail.com";
-private String destinationSMS = "+911234567890";
