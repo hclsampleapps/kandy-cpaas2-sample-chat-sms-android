@@ -11,6 +11,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -23,23 +29,56 @@ import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
-public class HomeActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity{
 
-    Fragment chatFragment = ChatFragment.newInstance();
-    Fragment smsFragment = SMSFragment.newInstance();
-    Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
+//    Fragment chatFragment = ChatFragment.newInstance();
+//    Fragment smsFragment = SMSFragment.newInstance();
+//    Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
     Toolbar toolbar;
+    AppBarConfiguration appBarConfiguration;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        showProgressBar("");
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //showProgressBar("");
+       // toolbar = findViewById(R.id.toolbar);
+   //     setSupportActionBar(toolbar);
+    //    DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
+       /* NavHostFragment navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+         appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph())
+                        .setDrawerLayout(drawer)
+                        .build();
+*/
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        NavigationView navView = findViewById(R.id.nav_view);
+        NavigationUI.setupWithNavController(navView, navController);
+
+/*
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder()
+                .setFallbackOnNavigateUpListener(::onSupportNavigateUp)
+        .build();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        NavigationUI.setupWithNavController(
+                toolbar, navController, appBarConfiguration);
+
+                */
+
+/*
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,7 +87,7 @@ public class HomeActivity extends BaseActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+*/
         Bundle extras = getIntent().getExtras();
         String idToken = null;
         String accessToken = null;
@@ -59,24 +98,28 @@ public class HomeActivity extends BaseActivity
             baseUrl = extras.getString(LoginActivity.base_url);
         }
 
-        App app = (App) getApplicationContext();
-        app.setCpass(baseUrl, accessToken, idToken, new CpassListner() {
-            @Override
-            public void onCpassSuccess() {
-                hideProgressBAr();
-            }
-
-            @Override
-            public void onCpassFail() {
-                hideProgressBAr();
-            }
-        });
-
         setUserInfo(idToken);
+      //  NavigationUI.setupWithNavController(
+        //        toolbar, navController, appBarConfiguration);
 
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
+        //  onNavigationItemSelected(navigationView.getMenu().getItem(0));
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
+/*
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -135,7 +178,7 @@ public class HomeActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+*/
     private void setUserInfo(String idToken) {
         JWT jwt = new JWT(idToken);
         String email = jwt.getClaim("email").asString();
@@ -152,7 +195,6 @@ public class HomeActivity extends BaseActivity
 
     public interface CpassListner {
         void onCpassSuccess();
-
         void onCpassFail();
     }
 }

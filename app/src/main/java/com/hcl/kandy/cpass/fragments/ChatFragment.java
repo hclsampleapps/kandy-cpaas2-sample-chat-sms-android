@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.hcl.kandy.cpass.App;
 import com.hcl.kandy.cpass.R;
+import com.hcl.kandy.cpass.activities.HomeActivity;
 import com.hcl.kandy.cpass.adapters.ChatAdapter;
 import com.hcl.kandy.cpass.models.ChatModel;
 import com.rbbn.cpaas.mobile.CPaaS;
@@ -58,6 +59,9 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getContext();
+
+
+
         if (context != null)
             initChatService(context);
         mChatModels = new ArrayList<>();
