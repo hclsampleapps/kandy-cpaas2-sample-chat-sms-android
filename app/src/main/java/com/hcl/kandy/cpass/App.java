@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.hcl.kandy.cpass.activities.HomeActivity;
+import com.hcl.kandy.cpass.activities.LoginFragment;
 import com.rbbn.cpaas.mobile.CPaaS;
 import com.rbbn.cpaas.mobile.authentication.api.Authentication;
 import com.rbbn.cpaas.mobile.authentication.api.ConnectionCallback;
@@ -28,7 +29,7 @@ public class App extends Application {
         super.onCreate();
     }
 
-    public void setCpass(String baseUrl, String mAccessToken, String idToken, HomeActivity.CpassListner cpassListner) {
+    public void setCpass(String baseUrl, String mAccessToken, String idToken, LoginFragment.CpassListner cpassListner) {
         Context context = getApplicationContext();
 
         Configuration.getInstance().setRestServerUrl(baseUrl);
@@ -40,7 +41,7 @@ public class App extends Application {
 
     }
 
-    public static CPaaS initKandyService(String accessToken, String idToken, HomeActivity.CpassListner cpassListner) {
+    public static CPaaS initKandyService(String accessToken, String idToken, LoginFragment.CpassListner cpassListner) {
         Log.d("CpassSubscribe", "initKAndyService()");
         int lifetime = 3600; //in seconds
 

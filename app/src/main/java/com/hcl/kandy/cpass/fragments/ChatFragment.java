@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -46,14 +48,14 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
     private ArrayList<ChatModel> mChatModels;
     private ImageButton btnFetchChat;
     private LinearLayout showChatLayout;
-
+/*
     public ChatFragment() {
 
     }
 
     public static ChatFragment newInstance() {
         return new ChatFragment();
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,11 @@ public class ChatFragment extends BaseFragment implements View.OnClickListener {
         mBtnSendMessage.setOnClickListener(this);
 
         return inflate;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
