@@ -29,13 +29,19 @@ import com.hcl.kandy.cpass.fragments.MultiMediaChatFragment;
 import com.hcl.kandy.cpass.fragments.SMSFragment;
 import com.hcl.kandy.cpass.utils.jwt.JWT;
 
-public class HomeActivity extends BaseActivity{
+public class HomeActivity extends BaseActivity  {
 
 //    Fragment chatFragment = ChatFragment.newInstance();
 //    Fragment smsFragment = SMSFragment.newInstance();
 //    Fragment multimediaChatFragment = MultiMediaChatFragment.newInstance();
-    Toolbar toolbar;
-    AppBarConfiguration appBarConfiguration;
+
+public Toolbar toolbar;
+
+    public DrawerLayout drawerLayout;
+
+    public NavController navController;
+
+    public NavigationView navigationView;
 
     @Override
     protected void onStart() {
@@ -48,9 +54,11 @@ public class HomeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        setupNavigation();
+
         //showProgressBar("");
-       // toolbar = findViewById(R.id.toolbar);
-   //     setSupportActionBar(toolbar);
+       //toolbar = findViewById(R.id.toolbar);
+       //setSupportActionBar(toolbar);
     //    DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
        /* NavHostFragment navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
@@ -60,11 +68,17 @@ public class HomeActivity extends BaseActivity{
                         .setDrawerLayout(drawer)
                         .build();
 */
+/*
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
+
+        appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).build();
+
         NavigationView navView = findViewById(R.id.nav_view);
-        NavigationUI.setupWithNavController(navView, navController);
+        NavigationUI.setupWithNavController(
+                toolbar, navController, appBarConfiguration);*/
 
 /*
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -106,31 +120,121 @@ public class HomeActivity extends BaseActivity{
         //  onNavigationItemSelected(navigationView.getMenu().getItem(0));
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.onNavDestinationSelected(item, navController)
-                || super.onOptionsItemSelected(item);
+
+    private void setupNavigation() {
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        navigationView = findViewById(R.id.nav_view);
+
+      //  NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        // navController = navHostFragment.getNavController();
+
+       navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
+
+        NavigationUI.setupWithNavController(navigationView, navController);
+       // NavigationUI.setupWithNavController(
+       //         toolbar, navController, appBarConfiguration);
+       // navigationView.setNavigationItemSelectedListener(this);
+
     }
 /*
     @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+
+      //  return NavigationUI.navigateUp (drawerLayout, Navigation.findNavController(this, R.id.nav_host_fragment));
+    }
+*/
+
+
+    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
+
+
+
+
+
+
+
+   /* @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+*/
+
+   /* @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
+*/
+
+   /* @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        menuItem.setChecked(true);
+
+        drawerLayout.closeDrawers();
+
+        int id = menuItem.getItemId();
+
+        switch (id) {
+
+            case R.id.nav_chat:
+                navController.navigate(R.id.nav_chat);
+                break;
+
+            case R.id.nav_sms:
+                navController.navigate(R.id.nav_sms);
+                break;
+
+            case R.id.nav_multimedia:
+                navController.navigate(R.id.nav_multimedia);
+                break;
+
+        }
+        return true;
+
+    }
+*/
+
+//
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
+
+   /* @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
