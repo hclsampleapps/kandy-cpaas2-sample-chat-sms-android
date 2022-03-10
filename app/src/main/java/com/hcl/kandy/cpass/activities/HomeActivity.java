@@ -39,7 +39,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
         setupNavigation();
 
-
         Bundle extras = getIntent().getExtras();
         String idToken = null;
         String accessToken = null;
@@ -97,11 +96,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         menuItem.setChecked(true);
-
         drawerLayout.closeDrawers();
-
         int id = menuItem.getItemId();
-
         switch (id) {
 
             case R.id.nav_chat:
@@ -125,68 +121,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
 
     }
-
-
-//
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
-
-    /* @SuppressWarnings("StatementWithEmptyBody")
-     @Override
-     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-         // Handle navigation view item clicks here.
-         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
-         int id = item.getItemId();
-
-         if (id == R.id.nav_multimedia) {
-             fragmentTransaction
-                     .replace(R.id.container, multimediaChatFragment).commit();
-
-             ActionBar supportActionBar = getSupportActionBar();
-             if (supportActionBar != null)
-                 supportActionBar.setTitle("Multimedia App");
-
-             item.setChecked(true);
-             invalidateOptionsMenu();
-         }
-         if (id == R.id.nav_chat) {
-             fragmentTransaction
-                     .replace(R.id.container, chatFragment).commit();
-
-             ActionBar supportActionBar = getSupportActionBar();
-             if (supportActionBar != null)
-                 supportActionBar.setTitle("Chat App");
-
-             item.setChecked(true);
-             invalidateOptionsMenu();
-         } else if (id == R.id.nav_sms) {
-             fragmentTransaction
-                     .replace(R.id.container, smsFragment).commit();
-
-             ActionBar supportActionBar = getSupportActionBar();
-             if (supportActionBar != null)
-                 supportActionBar.setTitle("SMS App");
-
-             item.setChecked(true);
-             invalidateOptionsMenu();
-         } else if (id == R.id.nav_logout) {
-             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-             Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-             finish();
-         }
-         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-         drawer.closeDrawer(GravityCompat.START);
-         return true;
-     }
- */
     private void setUserInfo(String idToken) {
         JWT jwt = new JWT(idToken);
         String email = jwt.getClaim("email").asString();

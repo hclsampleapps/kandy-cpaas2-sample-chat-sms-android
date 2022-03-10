@@ -9,16 +9,16 @@
         android:id="@+id/nav_chat"
         android:name="com.hcl.kandy.cpass.fragments.ChatFragment"
         tools:layout="@layout/fragment_chat"
-        android:label="ChatFragment" />
+        android:label="Chat" />
     <fragment
         android:id="@id/nav_sms"
         android:name="com.hcl.kandy.cpass.fragments.SMSFragment"
         tools:layout="@layout/fragment_sms"
-        android:label="SMSFragment" />
+        android:label="SMS" />
     <fragment
         android:id="@id/nav_multimedia"
         android:name="com.hcl.kandy.cpass.fragments.MultiMediaChatFragment"
         tools:layout="@layout/fragment_multimediachat"
-        android:label="MultiMediaChatFragment" />
+        android:label="MultiMedia Chat" />
 
 </navigation>
