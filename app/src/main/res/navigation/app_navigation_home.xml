@@ -11,12 +11,12 @@
         tools:layout="@layout/fragment_chat"
         android:label="ChatFragment" />
     <fragment
-        android:id="@+id/nav_sms"
+        android:id="@id/nav_sms"
         android:name="com.hcl.kandy.cpass.fragments.SMSFragment"
         tools:layout="@layout/fragment_sms"
         android:label="SMSFragment" />
     <fragment
-        android:id="@+id/nav_multimedia"
+        android:id="@id/nav_multimedia"
         android:name="com.hcl.kandy.cpass.fragments.MultiMediaChatFragment"
         tools:layout="@layout/fragment_multimediachat"
         android:label="MultiMediaChatFragment" />
